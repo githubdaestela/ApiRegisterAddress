@@ -33,9 +33,9 @@ public class EnderecoController {
 
     @PostMapping("/cadastrar/{id}")
     public ResponseEntity<UsuarioDTO> cadastrar(@RequestBody @Valid EnderecoForm form, @PathVariable Long id) {
-        Optional<Usuario> usuario = UsuarioRepository.findById(id);
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
         if(usuario.isPresent()) {
-            Endereco endereco = viacep.getEndereco(form.getCep());
+            Endereco endereco = ViaCepService.getEndereco(form.getCep());
             endereco.setUsuario(usuario.get());
             form.cadastrar(endereco, form, enderecoRepository);
             return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioDTO(usuario.get()));
