@@ -19,11 +19,10 @@ public class UsuarioDTO {
     public UsuarioDTO(Usuario usuario) {
         this.nomeUsuario = usuario.getNomeUsuario();
         this.emailUsuario = usuario.getEmailUsuario();
-        this.dataNascimentoUsuario = getDataNascimentoUsuario();
+        this.dataNascimentoUsuario = usuario.getDataNascimentoUsuario();
         this.cpfUsuario = usuario.getCpfUsuario();
         this.endereco = usuario.getEndereco();
     }
-
 
     //Getters e Setters
     public String getNomeUsuario() {

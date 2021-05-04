@@ -32,9 +32,7 @@ public class Usuario {
     @NotNull
     private String cpfUsuario;
 
-    @Column(unique = true)
     @NotNull
-    @JsonFormat(pattern = "dd-mm-yyyy")
     private LocalDate dataNascimentoUsuario;
 
     @OneToMany(mappedBy = "usuario")
