@@ -2,19 +2,18 @@ package com.estelamaria.orange.regist.addr.form;
 
 import com.estelamaria.orange.regist.addr.model.Endereco;
 import com.estelamaria.orange.regist.addr.repository.EnderecoRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class EnderecoForm {
 
     //Atributos
-    @JsonIgnoreProperties("cep")
+    @JsonProperty("cep")
     @NotNull
     private String cep;
 
-    @NotNull
+    @JsonProperty("numero")
     private Integer numero;
 
     private String complemento;
@@ -24,7 +23,7 @@ public class EnderecoForm {
         if(form.getComplemento() != null) {
             endereco.setComplemento(complemento);
         }
-        endereco.setNumero(numero);
+        endereco.setNumero(form.getNumero());
         repository.save(endereco);
     }
 

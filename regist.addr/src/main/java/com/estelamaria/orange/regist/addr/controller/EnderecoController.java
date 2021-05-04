@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@EnableFeignClients(basePackages = {"com.estelamaria.orange.regist.addr.controller"})
+@EnableFeignClients(basePackages = {"com.estelamaria.orange.regist.addr.service","com.estelamaria.orange.regist.addr.controller"})
 public class EnderecoController {
 
     @Autowired
@@ -29,14 +29,16 @@ public class EnderecoController {
     UsuarioRepository usuarioRepository;
 
     @Autowired
-    private ViaCepService viacep;
+    ViaCepService viacep;
 
-    @PostMapping("/cadastrar/{id}")
+    @PostMapping("/endereco/{id}")
     public ResponseEntity<UsuarioDTO> cadastrar(@RequestBody @Valid EnderecoForm form, @PathVariable Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if(usuario.isPresent()) {
-            Endereco endereco = ViaCepService.getEndereco(form.getCep());
+            Endereco endereco = viacep.getEndereco(form.getCep());
             endereco.setUsuario(usuario.get());
+            endereco.setNumero(form.getNumero());
+            System.out.print(endereco);
             form.cadastrar(endereco, form, enderecoRepository);
             return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioDTO(usuario.get()));
         } return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

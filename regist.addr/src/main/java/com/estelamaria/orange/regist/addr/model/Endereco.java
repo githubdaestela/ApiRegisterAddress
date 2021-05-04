@@ -3,14 +3,12 @@ package com.estelamaria.orange.regist.addr.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "endereco")
-@JsonPropertyOrder ({"id", "cep", "logradouro", "numero", "complemento", "bairro", "cidade", "estado"})
+@JsonPropertyOrder ({"id", "cep", "logradouro", "numero", "complemento", "bairro", "localidade", "uf"})
 public class Endereco {
 
     @Id
@@ -19,17 +17,14 @@ public class Endereco {
 
     @JsonProperty("cep")
     @NotNull
-    @NotEmpty(message = "Campo CEP não pode ser vazio.")
     private String cep;
 
     @JsonProperty("logradouro")
     @NotNull
-    @NotEmpty(message = "Campo logradouro não pode ser vazio.")
     private String logradouro;
 
     @JsonProperty("numero")
     @NotNull
-    @NotEmpty(message = "Campo número não pode ser vazio.")
     private Integer numero;
 
     @JsonProperty("complemento")
@@ -37,22 +32,20 @@ public class Endereco {
 
     @JsonProperty("bairro")
     @NotNull
-    @NotEmpty(message = "Campo bairro não pode ser vazio.")
     private String bairro;
 
-    @JsonProperty("cidade")
+    @JsonProperty("localidade")
     @NotNull
-    @NotEmpty(message = "Campo cidade não pode ser vazio.")
     private String cidade;
 
-    @JsonProperty("estado")
+    @JsonProperty("uf")
     @NotNull
-    @NotEmpty(message = "Campo estado não pode ser vazio.")
     private String estado;
 
     @ManyToOne
     @JsonIgnore
     private Usuario usuario;
+    
 
     //Getters e Setters
     public Long getId() {

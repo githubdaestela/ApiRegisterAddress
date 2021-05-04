@@ -16,16 +16,14 @@ public class UsuarioDTO {
     private List<Endereco> endereco;
 
     //Métodos
-    public UsuarioDTO(String nomeUsuario, String emailUsuario, String cpfUsuario, LocalDate dataNascimentoUsuario, List<Endereco> endereco) {
-        this.nomeUsuario = nomeUsuario;
-        this.emailUsuario = emailUsuario;
-        this.cpfUsuario = cpfUsuario;
-        this.dataNascimentoUsuario = dataNascimentoUsuario;
-        this.endereco = endereco;
+    public UsuarioDTO(Usuario usuario) {
+        this.nomeUsuario = usuario.getNomeUsuario();
+        this.emailUsuario = usuario.getEmailUsuario();
+        this.dataNascimentoUsuario = getDataNascimentoUsuario();
+        this.cpfUsuario = usuario.getCpfUsuario();
+        this.endereco = usuario.getEndereco();
     }
 
-    public UsuarioDTO(Usuario usuario) {
-    }
 
     //Getters e Setters
     public String getNomeUsuario() {

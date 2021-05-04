@@ -2,11 +2,11 @@ package com.estelamaria.orange.regist.addr.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,29 +21,25 @@ public class Usuario {
     private long id;
 
     @NotNull
-    @NotEmpty(message = "Campo nome não pode ser vazio.")
     private String nomeUsuario;
 
     @Column(unique = true)
     @NotNull
-    @NotEmpty(message = "Campo e-mail não pode ser vazio.")
     @Email
     private String emailUsuario;
 
     @Column(unique = true)
     @NotNull
-    @NotEmpty(message ="Campo CPF não pode ser vazio.")
     private String cpfUsuario;
 
     @Column(unique = true)
     @NotNull
-    @NotEmpty(message = "Campo data de nascimento não pode ser vazio.")
     @JsonFormat(pattern = "dd-mm-yyyy")
     private LocalDate dataNascimentoUsuario;
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnoreProperties("usuario")
-    private List<Endereco> enderecos;
+    private List<Endereco> endereco;
 
     //Getters e Setters
     public long getId() {
@@ -87,10 +83,10 @@ public class Usuario {
     }
 
     public List<Endereco> getEndereco() {
-        return enderecos;
+        return endereco;
     }
 
     public void setEndereco(List<Endereco> endereco) {
-        this.enderecos = endereco;
+        this.endereco = endereco;
     }
 }
